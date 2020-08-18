@@ -1,4 +1,4 @@
-"""Retrieve Tweets, embeddings, and persis in the database."""
+"""Retrieve Tweets, embeddings, and persist in the database."""
 from os import getenv
 import basilica
 import tweepy
@@ -10,7 +10,6 @@ TWITTER_USERS = ['calebhicks', 'elonmusk', 'rrherr', 'SteveMartinToGo',
                  'common_squirrel', 'KenJennings', 'conanobrien',
                  'big_ben_clock', 'IAM_SHAKESPEARE']
 
-# TODO don't have raw secrets in the code, move to .env!
 TWITTER_API_KEY = getenv('TWITTER_API_KEY')
 TWITTER_API_SECRET_KEY = getenv('TWITTER_API_SECRET_KEY')
 TWITTER_AUTH = tweepy.OAuthHandler(TWITTER_API_KEY, TWITTER_API_SECRET_KEY)
@@ -39,7 +38,7 @@ def add_or_update_user(username):
                              embedding=embedding)
             db_user.tweets.append(db_tweet)
             DB.session.add(db_tweet)
-    except EXCEPTION as e:
+    except Exception as e:
         print('Error processing {}: {}'.format(username, e))
         raise e
     else:

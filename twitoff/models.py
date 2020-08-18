@@ -5,21 +5,21 @@ DB = SQLAlchemy()
 
 
 class User(DB.Model):
-    """Twitter users coresponding to Tweets."""
+    """Twitter users corresponding to Tweets."""
     id = DB.Column(DB.BigInteger, primary_key=True)
     name = DB.Column(DB.String(15), nullable=False)
     # Tweet IDs are ordinal ints, so can be used to fetch only recent tweets
     newest_tweet_id = DB.Column(DB.BigInteger)
 
     def __repr__(self):
-        return'-User {}-'.format(self.name)
+        return '-User {}-'.format(self.name)
 
 
 class Tweet(DB.Model):
     """Tweet text and data."""
     id = DB.Column(DB.BigInteger, primary_key=True)
-    text = DB.Column(DB.Unicode(300)) # Allows for text + links
-    embedding = DB.Column(DB.Pickletype, nullable=False)
+    text = DB.Column(DB.Unicode(300))  # Allows for text + links
+    embedding = DB.Column(DB.PickleType, nullable=False)
     user_id = DB.Column(DB.BigInteger, DB.ForeignKey('user.id'), nullable=False)
     user = DB.relationship('User', backref=DB.backref('tweets', lazy=True))
 
