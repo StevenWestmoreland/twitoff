@@ -19,7 +19,7 @@ def create_app():
                                users=User.query.all())
     
     @app.route('/user', methods=['POST'])
-    @app.route(/user/<name>, methods=['GET'])
+    @app.route('/user/<name>', methods=['GET'])
     def user(name=None, message=''):
         name = name or request.values['user_name']
         try:
@@ -42,7 +42,7 @@ def create_app():
         else:
             prediction = predict_user(user1, user2, 
                                       request.values['tweet_text'])
-            message = '"{} is more likely to be said by {} than {}'.format(
+            message = '"{}" is more likely to be said by {} than {}'.format(
                 request.values['tweet_text'], user1 if prediction else user2,
                 user2 if prediction else user1)
         return render_template('prediction.html', title='Prediction', message=message)

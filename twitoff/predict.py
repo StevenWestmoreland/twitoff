@@ -4,11 +4,12 @@ from sklearn.linear_model import LogisticRegression
 from .models import User
 from .twitter import BASILICA
 
+
 def predict_user(user1_name, user2_name, tweet_text):
     """
     Determine and return which user is more likely to say a given Tweet.
     
-    Example execution: predict_user('austen', 'elonmusk', 'Lambda School rocks!')
+    Example run: predict_user('austen', 'elonmusk', 'Lambda School rocks!')
     Returns 1 (corresponding to first user passed in) or 0 (second).
     """
     user1 = User.query.filter(User.name == user1_name).one()
@@ -21,4 +22,4 @@ def predict_user(user1_name, user2_name, tweet_text):
     log_reg = LogisticRegression().fit(embeddings, labels)
     # We've done our data science! Now to predict!
     tweet_embedding = BASILICA.embed_sentence(tweet_text, model='twitter')
-    return log_reg.predict(np.array(tweet_embedding).reshape(1,-1))
+    return log_reg.predict(np.array(tweet_embedding).reshape(1, -1))
