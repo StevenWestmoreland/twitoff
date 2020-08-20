@@ -45,7 +45,7 @@ def create_app():
                                       request.values['tweet_text'])
             tweet = request.values['tweet_text']
             speaker = user2 if prediction[0] == 0.0 else user1
-            not_speaker = user1 if prediction[0] == 0.0 else user 2
+            not_speaker = user1 if prediction[0] == 0.0 else user2
             message = f'"{tweet}" is more likely to be said by {speaker} than by {not_speaker}'
         return render_template('prediction.html', title='Prediction', message=message)
 
